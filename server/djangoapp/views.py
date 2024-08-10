@@ -7,7 +7,7 @@ from django.contrib.auth import login, authenticate
 import logging
 import json
 from django.views.decorators.csrf import csrf_exempt
-from .restapis import get_request, analyze_review_sentiments, post_review
+# from .restapis import get_request, analyze_review_sentiments, post_review
 
 logger = logging.getLogger(__name__)
 
@@ -103,7 +103,8 @@ def add_review(request):
     if not request.user.is_anonymous:
         data = json.loads(request.body)
         try:
-            # response = post_review(data)
+            response = post_review(data)
+            print(response)
             return JsonResponse({"status": 200})
         except Exception as ex:
             return JsonResponse({"status": 401,
